@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: WISK Public Sales Upload API
+  version: '1.0'
+  description: >-
+    WISK's public sales-upload API lets POS providers and integration partners
+    push sales line items into a customer's WISK account so that sales can be
+    reconciled against inventory. A partner submits an array of sales lines via
+    a single POST operation. WISK provisions each partner with a venue unique
+    identifier that is supplied in the request header to route the data to the
+    correct venue/account.
+
+
+    This specification was generated from WISK's public documentation. The
+    request path, JSON body structure, and field definitions are taken
+    verbatim from the public "Public Sales upload" guide; the exact request
+    header name is provisioned per-partner by WISK and is therefore modeled
+    generically.
+  contact:
+    name: WISK Integrations Team
+    url: https://help.wisk.ai/en/articles/5071983-integrating-with-wisk-for-pos-providers
+  x-generated-from: documentation
+  x-source-url: https://wiskai.notion.site/Public-Sales-upload-9d06c365cdea42069598a526dd657086
+  x-last-validated: '2026-06-03'
+servers:
+  - url: https://api.wisk.ai
+    description: WISK production API
+tags:
+  - name: Sales
+    description: Push point-of-sale sales line items into a WISK venue account.
+paths:
+  /public/sales/upload:
+    post:
+      operationId: uploadSales
+      summary: Upload Sales Lines
+      description: >-
+        Push an array of point-of-sale sales line items into a WISK venue
+        account. Each element of the array represents a single sales line from
+        a receipt; a receipt that contains multiple distinct items produces one
+        array element per item. The destination venue is identified by the
+        venue unique identifier header that WISK provisions for the partner.
+      tags:
+        - Sales
+      security:
+        - venueIdHeader: []
+      requestBody:
+        required: true
+        description: An array of sales line items to record against the venue.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesUpload'
+            examples:
+              UploadSalesRequestExample:
+                summary: Default uploadSales request
+                x-microcks-default: true
+                value:
+                  - id: '1'
+                    date: '2019-01-04T02:37:30Z'
+                    plu_number: '1'
+                    title: Negroni
+                    quantity: 2
+                    total: 60
+                  - id: '2'
+                    date: '2019-01-04T02:38:30Z'
+                    plu_number: '2'
+                    title: Mojito
+                    quantity: 4
+                    total: 40
+                  - id: '3'
+                    date: '2019-01-04T02:39:30Z'
+                    plu_number: '4'
+                    title: Martini
+                    quantity: 1
+                    total: 10
+                  - id: '4'
+                    date: '2019-01-04T02:40:30Z'
+                    plu_number: '4'
+                    title: Martini
+                    quantity: -1
+                    total: -10
+      responses:
+        '200':
+          description: Sales lines accepted for processing.
+        '400':
+          description: The request body was malformed or failed validation.
+        '401':
+          description: The venue unique identifier was missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    venueIdHeader:
+      type: apiKey
+      in: header
+      name: X-Wisk-Venue-Id
+      description: >-
+        Venue unique identifier provisioned by WISK for the partner. The public
+        guide instructs partners to "ask WISK to give the venue unique
+        identifier" and supply it in the request header. The exact header name
+        is assigned by WISK per integration; X-Wisk-Venue-Id is used here as a
+        representative placeholder.
+  schemas:
+    SalesUpload:
+      title: Sales Upload
+      type: array
+      description: >-
+        The POST body is a JSON array of sales line items.
+      items:
+        $ref: '#/components/schemas/SalesLine'
+    SalesLine:
+      title: Sales Line
+      type: object
+      description: >-
+        A single point-of-sale sales line from a receipt.
+      x-schema-source: documentation
+      x-source-url: https://wiskai.notion.site/Public-Sales-upload-9d06c365cdea42069598a526dd657086
+      required:
+        - id
+        - date
+        - plu_number
+        - title
+        - quantity
+        - total
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the receipt sales line. If a client buys
+            two different cocktails on one receipt, each cocktail is a separate
+            line with a different id.
+          example: '1'
+        date:
+          type: string
+          format: date-time
+          description: The receipt date, in ISO 8601 format.
+          example: '2019-01-04T02:37:30Z'
+        plu_number:
+          type: string
+          description: The unique POS identifier (price look-up number) of the POS item sold.
+          example: '1'
+        title:
+          type: string
+          description: The name of the POS item sold.
+          example: Negroni
+        quantity:
+          type: number
+          format: double
+          description: >-
+            How many of the item were sold. May be negative to represent a void
+            or refund line.
+          example: 2
+        total:
+          type: number
+          format: double
+          description: The total for the line in the venue's local currency.
+          example: 60

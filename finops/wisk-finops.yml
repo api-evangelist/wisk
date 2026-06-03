@@ -1,0 +1,92 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: WISK.ai
+providerId: wisk
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Hospitality
+  - Inventory
+  - Subscription
+description: >-
+  FOCUS-aligned FinOps for WISK.ai: a per-location monthly subscription (billed
+  annually) across three tiers, plus a food-inventory add-on, consumable
+  human-review invoice packs, and one-time setup/implementation fees.
+sources:
+  - https://www.wisk.ai/price
+  - https://help.wisk.ai/en/articles/5071983-integrating-with-wisk-for-pos-providers
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: WISK Inc.
+serviceCategory: Hospitality Inventory Management
+billingModel:
+  pricingCategory: Tiered Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+meters:
+  - name: location_subscription
+    unit: month
+    aggregation: sum
+    dimensions:
+      - location
+      - plan_tier
+  - name: food_inventory_addon
+    unit: month
+    aggregation: sum
+    dimensions:
+      - location
+  - name: human_reviewed_invoices
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - pack_size
+      - inventory_type
+  - name: setup_implementation_fees
+    unit: varies
+    aggregation: count
+    dimensions:
+      - plan_tier
+  - name: seats
+    unit: seat
+    aggregation: max
+    dimensions:
+      - location
+      - plan_tier
+focusColumns:
+  ServiceName: WISK.ai
+  ServiceCategory: Hospitality Inventory Management
+  ProviderName: WISK.ai
+  PublisherName: WISK Inc.
+  InvoiceIssuerName: WISK Inc.
+  BillingCurrency: USD
+  ChargeCategory: Usage
+principles:
+  - name: Visibility
+    description: >-
+      Subscription and add-on charges are visible per location and plan tier
+      through the WISK billing area; consumable human-review packs and one-time
+      setup fees appear as discrete line items.
+  - name: Allocation
+    description: >-
+      Spend is naturally allocated per location/venue, the unit WISK bills on,
+      letting multi-venue operators attribute inventory cost by site and plan tier.
+  - name: Optimization
+    description: >-
+      Operators control cost by matching tier to SKU count, invoice volume, and
+      user count, choosing AI-processed vs human-reviewed invoice handling, and
+      sizing human-review packs to actual invoice throughput.
+  - name: Accountability
+    description: >-
+      Per-location subscriptions and the Premium tier's dedicated success
+      manager establish clear ownership of inventory spend at the venue level.

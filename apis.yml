@@ -21,28 +21,43 @@ tags:
   - POS Integration
 url: https://raw.githubusercontent.com/api-evangelist/wisk/refs/heads/main/apis.yml
 created: '2026-06-02'
-modified: '2026-06-02'
+modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
   - aid: wisk:sales-upload-api
     name: WISK Public Sales Upload API
     description: >-
       WISK's public sales-upload API lets POS providers and partners push sales
-      data into customer WISK accounts. Minimum fields include POS code, item
-      name, quantity sold, and net sales. It is documented in a public Notion
-      guide, and integrations are initiated by contacting the WISK integrations
-      team. WISK can alternatively pull from a partner's own sales and
-      product/menu APIs.
+      data into customer WISK accounts. The documented operation is a POST to
+      /public/sales/upload that accepts a JSON array of sales line items, each
+      with id, date, plu_number, title, quantity, and total. The destination
+      venue is identified by a WISK-provisioned venue unique identifier supplied
+      in the request header. It is documented in a public Notion guide, and
+      integrations are initiated by contacting the WISK integrations team. WISK
+      can alternatively pull from a partner's own sales and product/menu APIs.
     humanURL: https://help.wisk.ai/en/articles/5071983-integrating-with-wisk-for-pos-providers
+    baseURL: https://api.wisk.ai
     tags:
       - Sales
       - POS Integration
       - Upload
     properties:
+      - type: OpenAPI
+        url: openapi/wisk-sales-upload-openapi.yml
       - type: Documentation
         url: https://wiskai.notion.site/Public-Sales-upload-9d06c365cdea42069598a526dd657086
       - type: GettingStarted
         url: https://help.wisk.ai/en/articles/5071983-integrating-with-wisk-for-pos-providers
+      - type: JSONSchema
+        url: json-schema/sales-upload-sales-line-schema.json
+      - type: JSONStructure
+        url: json-structure/sales-upload-sales-line-structure.json
+      - type: JSONLD
+        url: json-ld/wisk-sales-upload-context.jsonld
+      - type: Example
+        url: examples/sales-upload-sales-line-example.json
+      - type: NaftikoCapability
+        url: capabilities/sales-upload-sales.yaml
 common:
   - type: Website
     url: https://www.wisk.ai/
@@ -62,6 +77,59 @@ common:
     url: https://www.linkedin.com/company/wisk
   - type: X
     url: https://twitter.com/WISK_ai
+  - type: Plans
+    url: plans/wisk-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/wisk-rate-limits.yml
+  - type: FinOps
+    url: finops/wisk-finops.yml
+  - type: SpectralRules
+    url: rules/wisk-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/wisk-vocabulary.yaml
+  - type: Features
+    data:
+      - name: Sales Upload API
+        description: >-
+          Push point-of-sale sales lines into a WISK venue account via a single
+          POST to /public/sales/upload accepting a JSON array of line items.
+      - name: POS Pull Integrations
+        description: >-
+          WISK can pull from a partner's own Sales API and Product/Menu API to
+          ingest sales and item data into customer accounts.
+      - name: CSV/XLS Email Fallback
+        description: >-
+          For POS systems without an API, automated daily sales or product-mix
+          reports can be emailed to WISK in XLS or CSV format.
+      - name: Inventory and Cost Tracking
+        description: >-
+          Inventory counts, invoicing, purchasing, recipe costing, and
+          cost-of-goods tracking across bars, restaurants, and hotels.
+  - type: UseCases
+    data:
+      - name: POS Provider Integration
+        description: >-
+          A POS platform integrates with WISK so its venues' sales data flows
+          into WISK for inventory reconciliation.
+      - name: Daily Sales Reconciliation
+        description: >-
+          Push daily sales lines so WISK can deplete inventory against actual
+          POS sales and surface variance.
+      - name: Multi-Location Inventory
+        description: >-
+          Operators manage inventory, invoices, and cost of goods across
+          multiple venues from one platform.
+  - type: Integrations
+    data:
+      - name: Direct POS Integrations
+        description: >-
+          60+ POS systems including Toast, Square, Clover, Lightspeed, Revel,
+          TouchBistro, Heartland, Aldelo, Arryved, and many more.
+      - name: Omnivore Universal API
+        description: >-
+          Several POS systems integrate through Omnivore's Universal API,
+          including Aloha, Brink, Oracle Hospitality (Micros/Simphony),
+          POSitouch, and Doshii-connected systems.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

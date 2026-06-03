@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisk/refs/heads/main/json-structure/sales-upload-sales-line-structure.json",
+  "name": "SalesLine",
+  "description": "A single point-of-sale sales line from a receipt.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the receipt sales line. If a client buys two different cocktails on one receipt, each cocktail is a separate line with a different id."
+    },
+    "date": {
+      "type": "datetime",
+      "description": "The receipt date, in ISO 8601 format."
+    },
+    "plu_number": {
+      "type": "string",
+      "description": "The unique POS identifier (price look-up number) of the POS item sold."
+    },
+    "title": {
+      "type": "string",
+      "description": "The name of the POS item sold."
+    },
+    "quantity": {
+      "type": "double",
+      "description": "How many of the item were sold. May be negative to represent a void or refund line."
+    },
+    "total": {
+      "type": "double",
+      "description": "The total for the line in the venue's local currency."
+    }
+  },
+  "required": [
+    "id",
+    "date",
+    "plu_number",
+    "title",
+    "quantity",
+    "total"
+  ]
+}

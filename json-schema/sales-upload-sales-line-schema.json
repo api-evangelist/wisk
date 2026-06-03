@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wisk/refs/heads/main/json-schema/sales-upload-sales-line-schema.json",
+  "title": "SalesLine",
+  "description": "A single point-of-sale sales line from a receipt.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the receipt sales line. If a client buys two different cocktails on one receipt, each cocktail is a separate line with a different id.",
+      "example": "1"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The receipt date, in ISO 8601 format.",
+      "example": "2019-01-04T02:37:30Z"
+    },
+    "plu_number": {
+      "type": "string",
+      "description": "The unique POS identifier (price look-up number) of the POS item sold.",
+      "example": "1"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name of the POS item sold.",
+      "example": "Negroni"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double",
+      "description": "How many of the item were sold. May be negative to represent a void or refund line.",
+      "example": 2
+    },
+    "total": {
+      "type": "number",
+      "format": "double",
+      "description": "The total for the line in the venue's local currency.",
+      "example": 60
+    }
+  },
+  "required": [
+    "id",
+    "date",
+    "plu_number",
+    "title",
+    "quantity",
+    "total"
+  ]
+}

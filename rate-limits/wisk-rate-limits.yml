@@ -1,0 +1,49 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: WISK.ai
+providerId: wisk
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Sales
+  - POS Integration
+  - Hospitality
+description: >-
+  WISK does not publish numeric request-rate, concurrency, or quota limits for
+  its public sales-upload API. The documented usage model is a daily push of a
+  venue's sales lines (or a daily CSV/XLS email fallback) rather than a
+  high-frequency request pattern, and integrations are provisioned per-partner
+  by the WISK integrations team against a venue unique identifier supplied in
+  the request header. Any throttling or volume expectations are arranged
+  directly with WISK during onboarding. Values below are descriptive
+  placeholders pending confirmation from WISK; reconciled is false.
+sources:
+  - https://help.wisk.ai/en/articles/5071983-integrating-with-wisk-for-pos-providers
+  - https://wiskai.notion.site/Public-Sales-upload-9d06c365cdea42069598a526dd657086
+responseCodes:
+  throttled: 429
+limits:
+  - name: Sales upload requests
+    scope: account
+    metric: varies
+    limit: 'not published; sales typically pushed once per day per venue. Confirm volume with the WISK integrations team.'
+    notes: >-
+      WISK frames the integration as a daily sales feed per venue. No documented
+      per-second or per-minute ceiling.
+policies:
+  - name: Per-partner onboarding
+    description: >-
+      Integrations begin by contacting the WISK integrations team
+      (integrations@wisk.ai); rate and volume expectations are set during that
+      onboarding rather than published publicly.
+  - name: Daily batch cadence
+    description: >-
+      The expected pattern is one sales-upload batch per venue per day; the
+      CSV/XLS email fallback follows the same daily cadence.
+  - name: Venue-scoped requests
+    description: >-
+      Each request is scoped to a single venue via the WISK-provisioned venue
+      unique identifier in the request header.

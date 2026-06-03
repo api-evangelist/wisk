@@ -1,0 +1,113 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "WISK.ai"
+  description: >-
+    Vocabulary for WISK.ai's public sales-upload surface, mapping the
+    operational dimension of the public sales-upload API to the capability
+    dimension expressed as a Naftiko workflow. Covers the single documented
+    push operation by which POS providers and integration partners submit
+    point-of-sale sales lines into a customer's WISK venue account.
+  created: "2026-06-03"
+  modified: "2026-06-03"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+operational:
+  apis:
+    - name: "WISK Public Sales Upload API"
+      namespace: "sales-upload"
+      version: "1.0"
+      baseUrl: "https://api.wisk.ai"
+      status: active
+  resources:
+    - name: "Sales Lines"
+      api: "sales-upload"
+      description: "Point-of-sale sales line items submitted against a venue."
+      actions:
+        - upload
+  actions:
+    - name: upload
+      httpMethod: POST
+      pattern: write
+      description: "Push an array of sales line items into a WISK venue account."
+  schemas:
+    core:
+      - name: "Sales Line"
+        description: "A single point-of-sale sales line from a receipt."
+        properties:
+          - id
+          - date
+          - plu_number
+          - title
+          - quantity
+          - total
+      - name: "Sales Upload"
+        description: "A JSON array of Sales Line items forming the request body."
+  parameters:
+    identifiers:
+      - name: venue_id
+        location: header
+        description: "Venue unique identifier provisioned by WISK to route data to the correct account."
+  enums: {}
+  authentication:
+    schemes:
+      - name: venueIdHeader
+        type: apiKey
+        location: header
+        description: "WISK-provisioned venue unique identifier passed in a request header."
+        apis:
+          - sales-upload
+
+# CAPABILITY DIMENSION (from Naftiko)
+capability:
+  workflows:
+    - name: "Sales Upload — Sales"
+      file: "capabilities/sales-upload-sales.yaml"
+      description: "Push point-of-sale sales lines into a WISK venue account."
+      apis:
+        - sales-upload
+      toolCount: 1
+      personas:
+        - POS Provider
+        - Integration Partner
+      domains:
+        - Sales
+  personas:
+    - id: pos-provider
+      name: "POS Provider"
+      description: "A point-of-sale platform pushing its venues' sales data into WISK."
+      workflows:
+        - "Sales Upload — Sales"
+    - id: integration-partner
+      name: "Integration Partner"
+      description: "A data partner integrating sales feeds into customer WISK accounts."
+      workflows:
+        - "Sales Upload — Sales"
+  domains:
+    - name: Sales
+      description: "Submission and reconciliation of point-of-sale sales data."
+      resources:
+        - "Sales Lines"
+  namespaces:
+    - consumed: "sales-upload-sales"
+      restExposed: "sales-upload-sales-rest"
+      mcpExposed: "sales-upload-sales-mcp"
+      restPort: 8080
+      mcpPort: 9090
+  binds:
+    - key: WISK_VENUE_ID
+      description: "Venue unique identifier provisioned by WISK."
+      workflows:
+        - "Sales Upload — Sales"
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: "Sales Lines"
+    api: "sales-upload"
+    operations:
+      - uploadSales
+    workflows:
+      - "Sales Upload — Sales"
+    personas:
+      - POS Provider
+      - Integration Partner

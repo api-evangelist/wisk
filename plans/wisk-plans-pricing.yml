@@ -1,0 +1,320 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: WISK.ai
+providerId: wisk
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - Inventory
+  - Hospitality
+  - Bar
+  - Restaurant
+  - Subscription
+description: >-
+  WISK.ai prices its hospitality inventory platform as a per-location monthly
+  subscription billed annually, structured into three self-serve-to-white-glove
+  tiers (Essentials, Professional, Premium) that scale on SKUs, AI-processed
+  invoices, and users. A Food Inventory add-on layers onto the beverage tiers,
+  and consumable "Human Review" invoice packs and a one-time onboarding boost
+  are sold separately. Each tier carries a one-time guided setup / implementation
+  fee. The public sales-upload API itself is not separately metered; it is part
+  of the platform subscription and POS-integration onboarding handled by the
+  WISK integrations team.
+sources:
+  - https://www.wisk.ai/price
+plans:
+  - id: wisk-essentials
+    name: Essentials
+    type: subscription
+    description: Self-serve beverage inventory tier for smaller venues.
+    entries:
+      - label: Per-location subscription
+        name: location_subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$189/mo per location · billed annually'
+        userMultiplied: false
+      - label: Guided setup (one-time)
+        name: guided_setup
+        type: flat
+        metric: varies
+        limit: 1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$299'
+        userMultiplied: false
+      - label: SKUs
+        name: skus
+        type: quota
+        metric: varies
+        limit: 300
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: AI-processed invoices
+        name: ai_processed_invoices
+        type: quota
+        metric: varies
+        limit: 50
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: Users
+        name: users
+        type: quota
+        metric: seat
+        limit: 3
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Up to 300 SKUs
+      - name: 50 AI-processed invoices per month
+      - name: 3 users
+      - name: Basic reporting
+  - id: wisk-professional
+    name: Professional
+    type: subscription
+    description: Assisted beverage inventory tier (most popular).
+    entries:
+      - label: Per-location subscription
+        name: location_subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$249/mo per location · billed annually'
+        userMultiplied: false
+      - label: Implementation (one-time)
+        name: implementation
+        type: flat
+        metric: varies
+        limit: 1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$750'
+        userMultiplied: false
+      - label: SKUs
+        name: skus
+        type: quota
+        metric: varies
+        limit: 1000
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: AI-processed invoices
+        name: ai_processed_invoices
+        type: quota
+        metric: varies
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: Users
+        name: users
+        type: quota
+        metric: seat
+        limit: 15
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Up to 1,000 SKUs
+      - name: 100 AI-processed invoices per month
+      - name: 15 users
+      - name: Advanced reporting
+  - id: wisk-premium
+    name: Premium
+    type: subscription
+    description: White-glove beverage inventory tier with dedicated success manager.
+    entries:
+      - label: Per-location subscription
+        name: location_subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$499/mo per location · billed annually'
+        userMultiplied: false
+      - label: Implementation (one-time)
+        name: implementation
+        type: flat
+        metric: varies
+        limit: 1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$1,500'
+        userMultiplied: false
+      - label: SKUs
+        name: skus
+        type: quota
+        metric: varies
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: AI-processed invoices
+        name: ai_processed_invoices
+        type: quota
+        metric: varies
+        limit: 200
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: Human-reviewed invoices
+        name: human_reviewed_invoices
+        type: quota
+        metric: varies
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+      - label: Users
+        name: users
+        type: quota
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Unlimited SKUs
+      - name: 200 AI-processed invoices per month
+      - name: 100 human-reviewed invoices per month
+      - name: Unlimited users
+      - name: Dedicated success manager
+  - id: wisk-food-essentials
+    name: Food Essentials
+    type: subscription
+    description: Food inventory add-on requiring the Professional plan.
+    entries:
+      - label: Food inventory add-on
+        name: food_addon
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$99/mo add-on'
+        userMultiplied: false
+      - label: Implementation (one-time)
+        name: implementation
+        type: flat
+        metric: varies
+        limit: 1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$450'
+        userMultiplied: false
+    elements:
+      - name: Requires Professional plan
+  - id: wisk-food-professional
+    name: Food Professional
+    type: subscription
+    description: Food inventory add-on requiring the Premium plan; implementation included.
+    entries:
+      - label: Food inventory add-on
+        name: food_addon
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$199/mo add-on'
+        userMultiplied: false
+    elements:
+      - name: Requires Premium plan
+      - name: Implementation included
+  - id: wisk-human-review-packs
+    name: Human Review Packs
+    type: usage-based
+    description: Consumable monthly auto-renewing packs of human-reviewed invoices.
+    entries:
+      - label: Beverage review pack (Small)
+        name: beverage_review_small
+        type: tiered
+        metric: varies
+        limit: 20
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$49/20 invoices'
+        userMultiplied: false
+      - label: Beverage review pack (XL)
+        name: beverage_review_xl
+        type: tiered
+        metric: varies
+        limit: 200
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$459/200 invoices'
+        userMultiplied: false
+      - label: Food review pack (Small)
+        name: food_review_small
+        type: tiered
+        metric: varies
+        limit: 20
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$99/20 invoices'
+        userMultiplied: false
+      - label: Food review pack (XL)
+        name: food_review_xl
+        type: tiered
+        metric: varies
+        limit: 200
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: '$899/200 invoices'
+        userMultiplied: false
+      - label: Onboarding Boost Pack (one-time)
+        name: onboarding_boost
+        type: flat
+        metric: varies
+        limit: 150
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$179 one-time (150 invoices, auto-rolls to Medium pack after 60 days)'
+        userMultiplied: false
+    elements:
+      - name: Monthly auto-renewal
