@@ -1,0 +1,241 @@
+{
+  "item": [
+    {
+      "id": "5877ebc0-7b2f-470f-86a0-a3409b4228d0",
+      "name": "Sales",
+      "description": {
+        "content": "Push point-of-sale sales line items into a WISK venue account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ad08c18-14d4-4ba8-8a1d-b9e3b83f2d9c",
+          "name": "Upload Sales Lines",
+          "request": {
+            "name": "Upload Sales Lines",
+            "description": {
+              "content": "Push an array of point-of-sale sales line items into a WISK venue account. Each element of the array represents a single sales line from a receipt; a receipt that contains multiple distinct items produces one array element per item. The destination venue is identified by the venue unique identifier header that WISK provisions for the partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "sales",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Wisk-Venue-Id"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"date\": \"<dateTime>\",\n    \"plu_number\": \"<string>\",\n    \"title\": \"<string>\",\n    \"quantity\": \"<double>\",\n    \"total\": \"<double>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"date\": \"<dateTime>\",\n    \"plu_number\": \"<string>\",\n    \"title\": \"<string>\",\n    \"quantity\": \"<double>\",\n    \"total\": \"<double>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72e80308-77f7-4ad4-98e7-19f6b1221db0",
+              "name": "Sales lines accepted for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "sales",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Wisk-Venue-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"1\",\n    \"date\": \"2019-01-04T02:37:30Z\",\n    \"plu_number\": \"1\",\n    \"title\": \"Negroni\",\n    \"quantity\": 2,\n    \"total\": 60\n  },\n  {\n    \"id\": \"2\",\n    \"date\": \"2019-01-04T02:38:30Z\",\n    \"plu_number\": \"2\",\n    \"title\": \"Mojito\",\n    \"quantity\": 4,\n    \"total\": 40\n  },\n  {\n    \"id\": \"3\",\n    \"date\": \"2019-01-04T02:39:30Z\",\n    \"plu_number\": \"4\",\n    \"title\": \"Martini\",\n    \"quantity\": 1,\n    \"total\": 10\n  },\n  {\n    \"id\": \"4\",\n    \"date\": \"2019-01-04T02:40:30Z\",\n    \"plu_number\": \"4\",\n    \"title\": \"Martini\",\n    \"quantity\": -1,\n    \"total\": -10\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2f4cbee-221c-4fa7-a8e8-5b1efe65c877",
+              "name": "The request body was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "sales",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Wisk-Venue-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"1\",\n    \"date\": \"2019-01-04T02:37:30Z\",\n    \"plu_number\": \"1\",\n    \"title\": \"Negroni\",\n    \"quantity\": 2,\n    \"total\": 60\n  },\n  {\n    \"id\": \"2\",\n    \"date\": \"2019-01-04T02:38:30Z\",\n    \"plu_number\": \"2\",\n    \"title\": \"Mojito\",\n    \"quantity\": 4,\n    \"total\": 40\n  },\n  {\n    \"id\": \"3\",\n    \"date\": \"2019-01-04T02:39:30Z\",\n    \"plu_number\": \"4\",\n    \"title\": \"Martini\",\n    \"quantity\": 1,\n    \"total\": 10\n  },\n  {\n    \"id\": \"4\",\n    \"date\": \"2019-01-04T02:40:30Z\",\n    \"plu_number\": \"4\",\n    \"title\": \"Martini\",\n    \"quantity\": -1,\n    \"total\": -10\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76661618-9f0a-430e-a3a9-14e7d5bf66fe",
+              "name": "The venue unique identifier was missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "sales",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Wisk-Venue-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"1\",\n    \"date\": \"2019-01-04T02:37:30Z\",\n    \"plu_number\": \"1\",\n    \"title\": \"Negroni\",\n    \"quantity\": 2,\n    \"total\": 60\n  },\n  {\n    \"id\": \"2\",\n    \"date\": \"2019-01-04T02:38:30Z\",\n    \"plu_number\": \"2\",\n    \"title\": \"Mojito\",\n    \"quantity\": 4,\n    \"total\": 40\n  },\n  {\n    \"id\": \"3\",\n    \"date\": \"2019-01-04T02:39:30Z\",\n    \"plu_number\": \"4\",\n    \"title\": \"Martini\",\n    \"quantity\": 1,\n    \"total\": 10\n  },\n  {\n    \"id\": \"4\",\n    \"date\": \"2019-01-04T02:40:30Z\",\n    \"plu_number\": \"4\",\n    \"title\": \"Martini\",\n    \"quantity\": -1,\n    \"total\": -10\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wisk.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4dbfc893-fae3-4a62-b479-a534d81e9edc",
+    "name": "WISK Public Sales Upload API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WISK's public sales-upload API lets POS providers and integration partners push sales line items into a customer's WISK account so that sales can be reconciled against inventory. A partner submits an array of sales lines via a single POST operation. WISK provisions each partner with a venue unique identifier that is supplied in the request header to route the data to the correct venue/account.\n\nThis specification was generated from WISK's public documentation. The request path, JSON body structure, and field definitions are taken verbatim from the public \"Public Sales upload\" guide; the exact request header name is provisioned per-partner by WISK and is therefore modeled generically.\n\nContact Support:\n Name: WISK Integrations Team",
+      "type": "text/plain"
+    }
+  }
+}

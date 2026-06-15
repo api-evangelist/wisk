@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WISK Public Sales Upload API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sales",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload Sales Lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wisk.ai/public/sales/upload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Wisk-Venue-Id",
+              "value": "{{X-Wisk-Venue-Id}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Push an array of point-of-sale sales line items into a WISK venue account. Each element of the array represents a single sales line from a receipt; a receipt that contains multiple distinct items produces one array element per item. The destination venue is identified by the venue unique identifier header that WISK provisions for the partner."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
