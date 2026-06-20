@@ -8,7 +8,7 @@ description: >-
   WISK using its public sales-upload API, which is documented in a public Notion guide. New integrations begin by
   contacting the WISK integrations team, and email-based CSV/XLS feeds are supported as a fallback.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Restaurant
   - Bar
