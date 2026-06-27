@@ -49,14 +49,14 @@ apis:
         url: json-structure/sales-upload-sales-line-structure.json
       - type: JSONLD
         url: json-ld/wisk-sales-upload-context.jsonld
-      - type: Example
+      - type: Examples
         url: examples/sales-upload-sales-line-example.json
 common:
   - type: Website
     url: https://www.wisk.ai/
   - type: Documentation
     url: https://help.wisk.ai/en/articles/5071983-integrating-with-wisk-for-pos-providers
-  - type: SignUp
+  - type: Signup
     url: https://www.wisk.ai/demo
   - type: Login
     url: https://web.wisk.ai/signin

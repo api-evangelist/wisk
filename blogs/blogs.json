@@ -3,19 +3,12 @@
   "feeds": [
     {
       "source": "https://www.wisk.ai/blog",
-      "feed_url": "https://www.wisk.ai/blog",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://help.wisk.ai/en/",
-      "feed_url": "https://help.wisk.ai/en/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "feed_url": "",
+      "saved": 1,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 5,
+  "fetched": "2026-06-27T13:20:45Z",
+  "agent_pulled": "2026-06-27"
 }
